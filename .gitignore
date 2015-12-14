@@ -2,7 +2,7 @@
 application/config/development/*
 application/config/production/*
 application/config/testing/*
-index.php
+application/logs/*
+./index.php
 vendor/*
 uploads/*
-
