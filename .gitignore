@@ -1,0 +1,8 @@
+
+application/config/development/*
+application/config/production/*
+application/config/testing/*
+index.php
+vendor/*
+uploads/*
+
