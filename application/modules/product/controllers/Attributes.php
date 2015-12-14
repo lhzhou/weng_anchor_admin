@@ -12,7 +12,6 @@ class Attributes extends Base_Controller {
 
 	public function index($value='')
 	{
-		iapps@123
 		if ($this->input->is_ajax_request()) {
             $this->ajaxConfirmAddAttributes();
             return;
