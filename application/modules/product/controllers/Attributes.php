@@ -8,9 +8,36 @@ class Attributes extends Base_Controller {
 		parent::__construct();
 		$this->lang->load('dashboard' ,  'english');
         $data['lang']['nav_user'] =  $this->lang->line('nav_user');
+        Assets::add_js('product/create_product.js');
+		Assets::add_css('product/product.css');
+
+	}
+	
+	public function index($value='')
+	{
+
+
+		$data = array();
+		
+		$data['category'] =  array(
+			array('id' => 1 ,  'name' => '维生素'),
+			array('id' => 2 ,  'name' => '保健品'),
+
+			);
+		$data['product'] = array(
+			array('id' => 1 , 'type'=> '保健品规格' , 'category' => '维生素', 'name' => '维生素C' , 'last' => 99 , 'status' => '1' , 'created_at' => '2015-12-22 12:00:00'),
+			array('id' => 2 , 'type'=> '保健品用途' , 'category' => '维生素', 'name' => '维生素C' , 'last' => 99 , 'status' => '1' , 'created_at' => '2015-12-22 12:00:00'),
+			array('id' => 3 , 'type'=> '奶粉分段' , 'category' => '维生素', 'name' => '维生素C' , 'last' => 99 , 'status' => '2' , 'created_at' => '2015-12-22 12:00:00'),
+			array('id' => 4 , 'type'=> '面膜产品' , 'category' => '维生素', 'name' => '维生素C' , 'last' => 99 , 'status' => '1' , 'created_at' => '2015-12-22 12:00:00'),
+
+		);
+		
+		Template::set_view('v_attributes_list');
+        Template::set($data);
+        Template::render();
 	}
 
-	public function index($value='')
+	public function create($value='')
 	{
 		if ($this->input->is_ajax_request()) {
             $this->ajaxConfirmAddAttributes();
@@ -25,8 +52,6 @@ class Attributes extends Base_Controller {
 			array('id' => 3 ,  'name' => '婴儿产品'),
 			);
 		
-		Assets::add_js('product/create_product.js');
-		Assets::add_css('product/product.css');
 		Template::set_view('v_attributes_add');
         Template::set($data);
         Template::render();

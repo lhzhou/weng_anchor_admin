@@ -1,12 +1,23 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">
+            添加商品
+        </h3>
+		<ol class="breadcrumb">
+			<li><a href="#">首页</a></li>
+			<li><a href="#">商品管理</a></li>
+			<li class="active">添加商品</li>
+		</ol>
+    </div>
+</div>
+
+<div class="row">
+
 <div class="col-sm-12">
 
-  	<ol class="breadcrumb">
-	  <li><a href="#">首页</a></li>
-	  <li><a href="#">商品管理</a></li>
-	  <li class="active">添加商品</li>
-	</ol>
+  	
 	<?php
-	    $attributes = array('class' => 'form-horizontal col-sm-offset-1 col-sm-8 ajax_form');
+	    $attributes = array('class' => 'form-horizontal ajax_form');
 	    echo form_open_multipart(base_url('category/type/add_type'), $attributes);
 	?>
 			<div class="form-group">
@@ -61,6 +72,7 @@
 
 	</form>
 
+</div>
 </div>
 
 <script>
