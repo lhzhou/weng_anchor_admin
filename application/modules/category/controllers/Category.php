@@ -6,6 +6,7 @@ class Category extends Base_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->is_login();
 		$this->load->model('category_model', 'cm');
 		Assets::add_js('lib/treeview.js');
         Assets::add_js('category/category.js');
@@ -53,6 +54,7 @@ class Category extends Base_Controller {
 
 	public function edit_category($value='')
 	{
+
 		$id = $this->input->post('id');
 		$params['id'] = $id;
 		$params['lang'] = 1;
@@ -70,11 +72,55 @@ class Category extends Base_Controller {
             $this->session->set_flashdata('error_message', $message);
         }
 
+	}
 
+	public function update_category($value='')
+	{
+		$id        = $this->input->post('id');
+		$name      = $this->input->post('name');
+		$desc      = $this->input->post('desc');
+		$sort      = $this->input->post('sort');
+		$parent_id = $this->input->post('parent_id');
+		$lang      = $this->input->post('lang');
 
+		// echo json_encode($lang);exit();
+		// [{"lang":"1","name":"美丽","desc":"美丽描述"},{"lang":"2","name":"Beauty","desc":"Beauty description"}]
+		$lang_list = array();
+		$i = 0;
+		foreach ($lang as $key => $value) {
+			$lang_list[$i]['lang'] = $key;
+			$lang_list[$i]['name'] = $value['name'];
+			$lang_list[$i]['desc'] = $value['desc'];
+			$i++;
+		}
+		$params['id']        = $id;
+		$params['name']      = $name;
+		$params['desc']      = $desc;
+		$params['sort']      = $sort;
+		$params['parent_id'] = $parent_id;
+		$params['lang_list'] = json_encode($lang_list);
 
-			
+		$this->cm->update_category($params);
+		$output = $response->getOutput();
 
+		if ($response->isOK()) {
+            $results = $output->results;
+            $this->session->set_userdata('token' , $results['token']);
+            $this->session->set_userdata('admin_name' , $results['name'] );
+            set_cookie('name' , $lang);
+            $out['method'] = 'redirect';
+            $out['message'] = $output->message;
+            $out['url'] = site_url('dashboard');
+            $this->output->set_content_type('application/json')->set_output(json_encode($out));
+            return;
+        }else{
+
+			$results = $output->results;
+            $out['method'] = 'alert';
+            $out['message'] = $output->message;
+            $this->output->set_content_type('application/json')->set_output(json_encode($out));
+            return;
+        }
 	}
 
 	public function add_category()

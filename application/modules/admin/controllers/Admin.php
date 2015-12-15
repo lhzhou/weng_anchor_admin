@@ -22,6 +22,16 @@ class Admin extends Base_Controller  {
 		}
 	}
 
+
+	public function out($value='')
+	{
+		$array_items = array('token', 'admin_name');
+		$this->session->unset_userdata($array_items);
+		redirect(base_url(), 'refresh');
+	}
+
+
+
 	public function welcome()
 	{
 		$this->is_login();
