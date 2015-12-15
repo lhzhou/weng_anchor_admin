@@ -1,7 +1,20 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">
+            添加商品
+        </h3>
+		<ol class="breadcrumb">
+			<li><a href="#">首页</a></li>
+			<li><a href="#">商品管理</a></li>
+			<li class="active">添加商品</li>
+		</ol>
+    </div>
+</div>
+
 <?php $this->load->view('block/v_porduct_search');?>
 
-
-<div class="col-sm-offset-1 col-sm-10">
+<div class="row">
+	<div class="col-sm-12">
 		<table class="table table-bordered">
 			<col class="col-sm-1">
 			<col class="col-sm-2">
@@ -38,8 +51,9 @@
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="7">总数量：<span class="product_total">0</span></td>
+					<td colspan="7">翻页</td>
 				</tr>
 			</tfoot>
 		</table>
 	</div>
+</div>

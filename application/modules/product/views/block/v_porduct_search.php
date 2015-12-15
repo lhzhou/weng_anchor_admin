@@ -1,5 +1,7 @@
+<div class="row">
+
 <?php
-    $attributes = array('class' => 'form-horizontal col-sm-offset-1 col-sm-10 ajax_form');
+    $attributes = array('class' => 'form-horizontal col-sm-12 ajax_form');
     echo form_open_multipart(base_url('category/type/add_type'), $attributes);
 ?>
 <div class="search_panel">
@@ -54,4 +56,5 @@
 	
 </div>
 </form>
+</div>
 <div class="clearfix "></div>
