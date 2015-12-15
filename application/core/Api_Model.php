@@ -14,10 +14,11 @@ class Api_Model extends CI_Model
     protected function post($url = '', $params = array(), $headers = array(), $output = 'json')
     {
         $user_token = $this->session->userdata('token');
-        if (!empty($headers)){
+        if (!empty($user_token)){
             $headers['X_AUTHORIZATION'] = $user_token;
         }
 
+        // var_dump($url , $params , $headers);exit();
         $client = new Client();
         $client->setUserAgent($this->input->user_agent());
         $params['source_ip'] = $this->input->ip_address();
@@ -42,9 +43,10 @@ class Api_Model extends CI_Model
     {
 
         $user_token = $this->session->userdata('token');
-        if (!empty($headers)){
+        if (!empty($user_token)){
             $headers['X_AUTHORIZATION'] = $user_token;
         }
+
         $client = new Client();
         $client->setUserAgent($this->input->user_agent());
         $params['source_ip'] = $this->input->ip_address();

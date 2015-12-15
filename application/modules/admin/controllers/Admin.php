@@ -22,7 +22,6 @@ class Admin extends Base_Controller  {
 		}
 	}
 
-
 	public function out($value='')
 	{
 		$array_items = array('token', 'admin_name');
