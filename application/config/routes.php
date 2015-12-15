@@ -10,6 +10,7 @@ $route['login'] = 'dashboard/login';
 $route['ajax_login'] = 'dashboard/ajaxLogin';
 $route['ajax_form_upload_color_pic'] = 'product/ajax_form_upload_color_pic';
 $route['ajax_form_set_color_and_size_unit'] = 'product/ajax_form_set_color_and_size_unit';
+$route['ajax_form_edit_category'] = 'category/edit_category';
 
 
 /*

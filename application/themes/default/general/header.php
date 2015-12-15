@@ -17,6 +17,7 @@
     <link href="<?php echo site_url()?>kindeditor/themes/default/default.css" rel="stylesheet" />
 	<link href="<?php echo site_url()?>assets/css/lib/bootstrap-datetimepicker.min.css" rel="stylesheet">
 	<link href="<?php echo site_url()?>assets/css/style.css" rel="stylesheet">
+    <?php echo Assets::css(); ?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

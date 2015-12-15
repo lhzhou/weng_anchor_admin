@@ -14,13 +14,11 @@ class Dashboard extends Base_Controller {
 
 	public function index()
 	{
-		// $this->is_login();
-		// $headers['X_AUTHORIZATION'] = '4b1c1a6072dcc34ddbc7dcaa96988559'; 
-		// $resutls = $this->get('http://localhost/lhcloud/api/index.php/get/accounts/get_user_profile',array(),$headers);
-
+		$this->is_login();
 		$data = array();
 		// $config['language']	= 'english';
 
+		// echo $this->session->userdata('token');exit();
 		// var_dump(get_cookie('name'));exit();
 		Template::set_view('v_dashboard');
         Template::set($data);
@@ -47,8 +45,11 @@ class Dashboard extends Base_Controller {
 		$params['username'] = $this->input->post('username');
 		$params['password'] = $this->input->post('password');
 		$params['lang'] = $lang;
+		$params['login_type'] = 3;
 
-		$response = $this->post(BASE_API_URL.'account/account/admin_login' , $params);
+		$this->load->model('admin/admin_model', 'am');
+		$response = $this->am->admin_login($params);
+		// $response = $this->post(BASE_API_URL.'account/account/admin_login' , $params);
         
         $output = $response->getOutput();
       

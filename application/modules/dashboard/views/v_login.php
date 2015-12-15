@@ -21,7 +21,7 @@
         <div class="form-group">
             <div class=" col-sm-offset-3 col-sm-9">
                 <label class="radio-inline">
-                    <input type="radio" name="lang"  value="1"> 中文
+                    <input type="radio" name="lang"  value="1" checked=""> 中文
                 </label>
 
                 <label class="radio-inline">
@@ -145,4 +145,5 @@
 .login-help{
   font-size: 12px;
 }	
+#wrapper{padding-left: 0px;}
 </style>
