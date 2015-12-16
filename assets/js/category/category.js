@@ -39,6 +39,7 @@
 			$("#sub_category_select").html('');
     	}else{
 	    	CS.post('ajax_sub_category_select', {id: id}).done(function(d) {
+	    		// console.log(d);
 	            $("#sub_category_select").html(d);
 	        });
     	};	

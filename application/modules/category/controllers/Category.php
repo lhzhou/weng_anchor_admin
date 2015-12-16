@@ -146,8 +146,11 @@ class Category extends Base_Controller {
 
 		if ($root_category == 0) {
 			$parent_id = 0;
+		}else{
+			if (empty($parent_id)) {
+				$parent_id = $root_category;
+			}
 		}
-
 		$params['name']      = $lang_list[0]['name'];
 		$params['desc']      = $lang_list[0]['desc'];
 		$params['sort']      = $sort;
@@ -174,18 +177,18 @@ class Category extends Base_Controller {
 
 
 
-	public function sub_category_select()
+	public function sub_category_select($id="")
 	{
 		$id = $this->input->post('id');
 		$response = $this->cm->get_category($id);
         $output = $response->getOutput();
 		if ($response->isOK()) {
+			// var_dump($output->results);exit();
 			$data['sub_category'] = $output->results;
 			$html = $this->load->view('block/v_create_sub_category_select',$data,true);
 			$this->output->set_content_type('application/json')->set_output(json_encode($html));
         }else{
-        	return array();
-            $this->session->set_flashdata('error_message', $message);
+        	$this->output->set_content_type('application/json')->set_output(json_encode(array()));
         }
 
 	}
