@@ -45,7 +45,7 @@ class Dashboard extends Base_Controller {
 		$params['username'] = $this->input->post('username');
 		$params['password'] = $this->input->post('password');
 		$params['lang'] = $lang;
-		$params['login_type'] = 3;
+		$params['login_type'] = 2;
 
 		$this->load->model('admin/admin_model', 'am');
 		$response = $this->am->admin_login($params);

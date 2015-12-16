@@ -15,7 +15,7 @@ class Api_Model extends CI_Model
     {
         $user_token = $this->session->userdata('token');
         if (!empty($user_token)){
-            $headers['X_AUTHORIZATION'] = $user_token;
+            $headers['X-authorization'] = $user_token;
         }
 
         // var_dump($url , $params , $headers);exit();
@@ -44,7 +44,7 @@ class Api_Model extends CI_Model
 
         $user_token = $this->session->userdata('token');
         if (!empty($user_token)){
-            $headers['X_AUTHORIZATION'] = $user_token;
+            $headers['X-authorization'] = $user_token;
         }
 
         $client = new Client();
