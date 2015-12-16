@@ -100,22 +100,15 @@ class Category extends Base_Controller {
 		$params['parent_id'] = $parent_id;
 		$params['lang_list'] = json_encode($lang_list);
 
-		$this->cm->update_category($params);
+		$response = $this->cm->update_category($params);
 		$output = $response->getOutput();
 
 		if ($response->isOK()) {
-            $results = $output->results;
-            $this->session->set_userdata('token' , $results['token']);
-            $this->session->set_userdata('admin_name' , $results['name'] );
-            set_cookie('name' , $lang);
-            $out['method'] = 'redirect';
+            $out['method'] = 'alert';
             $out['message'] = $output->message;
-            $out['url'] = site_url('dashboard');
             $this->output->set_content_type('application/json')->set_output(json_encode($out));
             return;
         }else{
-
-			$results = $output->results;
             $out['method'] = 'alert';
             $out['message'] = $output->message;
             $this->output->set_content_type('application/json')->set_output(json_encode($out));

@@ -64,7 +64,6 @@ class Dashboard extends Base_Controller {
             $this->output->set_content_type('application/json')->set_output(json_encode($out));
             return;
         }else{
-
 			$results = $output->results;
             $out['method'] = 'alert';
             $out['message'] = $output->message;
