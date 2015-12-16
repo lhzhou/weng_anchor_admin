@@ -32,7 +32,12 @@
             </li>
 
             <li>
-                <a href="<?php echo base_url('category') ?>"> 分类管理</a>
+                <a href="javascript:;" data-toggle="collapse" data-target="#category"> 商品分类 <i class="fa fa-fw fa-caret-down"></i></a>
+                <ul id="category" class="collapse">
+
+                    <li><a href="<?php echo base_url('category/create') ?>">添加商品</a></li>
+                    <li><a href="<?php echo base_url('category') ?>">分类管理</a></li>
+                </ul>
             </li>
 
             <!-- 商品管理 -->

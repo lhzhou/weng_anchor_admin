@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-12">
         <h3 class="page-header">
-            添加商品
+            商品分类
         </h3>
 		<ol class="breadcrumb">
 			<li><a href="#">首页</a></li>

@@ -64,7 +64,7 @@ class Category extends Base_Controller {
 			$data =  $output->results;
 			// var_dump($data['category'][0]);exit();
 			// echo json_encode($data);exit();
-			$html = $this->load->view('v_category_edit',$data,true);
+			$html = $this->load->view('block/v_category_edit',$data,true);
 			$this->output->set_content_type('application/json')->set_output(json_encode($html));
 
         }else{
@@ -77,14 +77,10 @@ class Category extends Base_Controller {
 	public function update_category($value='')
 	{
 		$id        = $this->input->post('id');
-		$name      = $this->input->post('name');
-		$desc      = $this->input->post('desc');
 		$sort      = $this->input->post('sort');
 		$parent_id = $this->input->post('parent_id');
 		$lang      = $this->input->post('lang');
 
-		// echo json_encode($lang);exit();
-		// [{"lang":"1","name":"美丽","desc":"美丽描述"},{"lang":"2","name":"Beauty","desc":"Beauty description"}]
 		$lang_list = array();
 		$i = 0;
 		foreach ($lang as $key => $value) {
@@ -94,8 +90,8 @@ class Category extends Base_Controller {
 			$i++;
 		}
 		$params['id']        = $id;
-		$params['name']      = $name;
-		$params['desc']      = $desc;
+		$params['name']      = $lang_list[0]['name'];
+		$params['desc']      = $lang_list[0]['desc'];
 		$params['sort']      = $sort;
 		$params['parent_id'] = $parent_id;
 		$params['lang_list'] = json_encode($lang_list);
@@ -106,6 +102,7 @@ class Category extends Base_Controller {
 		if ($response->isOK()) {
             $out['method'] = 'alert';
             $out['message'] = $output->message;
+            $out['category_name'] = $lang_list[0]['name'];
             $this->output->set_content_type('application/json')->set_output(json_encode($out));
             return;
         }else{
@@ -116,14 +113,31 @@ class Category extends Base_Controller {
         }
 	}
 
-	public function add_category()
+	public function create()
 	{
 		$data = array();
+		$data['category'] = $this->get_category();
+		// echo json_encode($data);exit();
 		Template::set_view('v_category_add');
         Template::set($data);
         Template::render();
 	}
 
+	public function sub_category_select()
+	{
+		$id = $this->input->post('id');
+		$response = $this->cm->get_category($id);
+        $output = $response->getOutput();
+		if ($response->isOK()) {
+			$data['sub_category'] = $output->results;
+			$html = $this->load->view('block/v_create_sub_category_select',$data,true);
+			$this->output->set_content_type('application/json')->set_output(json_encode($html));
+        }else{
+        	return array();
+            $this->session->set_flashdata('error_message', $message);
+        }
+
+	}
 
 
 
