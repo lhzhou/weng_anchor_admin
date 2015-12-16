@@ -4,7 +4,7 @@ use Guzzle\Http\Client;
 
 class Api_Model extends CI_Model
 {
-    const GUZZLE_TIMEOUT = 30;
+    const GUZZLE_TIMEOUT = 300;
 
     public function __construct()
     {

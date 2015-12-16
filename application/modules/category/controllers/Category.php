@@ -80,7 +80,8 @@ class Category extends Base_Controller {
 		$sort      = $this->input->post('sort');
 		$parent_id = $this->input->post('parent_id');
 		$lang      = $this->input->post('lang');
-
+		$icon_file = $this->upload('icon');
+		$icon_file = (empty($icon_file)) ? '' : $icon_file ;
 		$lang_list = array();
 		$i = 0;
 		foreach ($lang as $key => $value) {
@@ -96,8 +97,13 @@ class Category extends Base_Controller {
 		$params['parent_id'] = $parent_id;
 		$params['lang_list'] = json_encode($lang_list);
 
+		$params['icon'] = '@'.$icon_file;
 		$response = $this->cm->update_category($params);
 		$output = $response->getOutput();
+		
+		if (!empty($icon_file)) {
+            	unlink($icon_file);
+        }
 
 		if ($response->isOK()) {
             $out['method'] = 'alert';
@@ -156,7 +162,7 @@ class Category extends Base_Controller {
 		$params['sort']      = $sort;
 		$params['parent_id'] = $parent_id;
 		$params['lang_list'] = json_encode($lang_list);
-
+		
 		$response = $this->cm->create_category($params);
 		$output = $response->getOutput();
 
