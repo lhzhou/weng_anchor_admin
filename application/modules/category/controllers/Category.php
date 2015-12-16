@@ -115,13 +115,64 @@ class Category extends Base_Controller {
 
 	public function create()
 	{
+		if ($this->input->is_ajax_request()) {
+            $this->ajaxConfirmAddCategory();
+            return;
+        }
+
 		$data = array();
 		$data['category'] = $this->get_category();
-		// echo json_encode($data);exit();
 		Template::set_view('v_category_add');
         Template::set($data);
         Template::render();
 	}
+
+	private function ajaxConfirmAddCategory(){
+
+
+		$sort      = $this->input->post('sort');
+		$parent_id = $this->input->post('parent_id');
+		$root_category = $this->input->post('root_category');
+		$lang      = $this->input->post('lang');
+
+		$lang_list = array();
+		$i = 0;
+		foreach ($lang as $key => $value) {
+			$lang_list[$i]['lang'] = $key;
+			$lang_list[$i]['name'] = $value['name'];
+			$lang_list[$i]['desc'] = $value['desc'];
+			$i++;
+		}
+
+		if ($root_category == 0) {
+			$parent_id = 0;
+		}
+
+		$params['name']      = $lang_list[0]['name'];
+		$params['desc']      = $lang_list[0]['desc'];
+		$params['sort']      = $sort;
+		$params['parent_id'] = $parent_id;
+		$params['lang_list'] = json_encode($lang_list);
+
+		$response = $this->cm->create_category($params);
+		$output = $response->getOutput();
+
+		if ($response->isOK()) {
+            $out['method'] = 'alert';
+            $out['message'] = $output->message;
+            $out['category_name'] = $lang_list[0]['name'];
+            $this->output->set_content_type('application/json')->set_output(json_encode($out));
+            return;
+        }else{
+            $out['method'] = 'alert';
+            $out['message'] = $output->message;
+            $this->output->set_content_type('application/json')->set_output(json_encode($out));
+            return;
+        }
+
+	}
+
+
 
 	public function sub_category_select()
 	{

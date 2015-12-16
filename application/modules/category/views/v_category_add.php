@@ -14,7 +14,7 @@
 
 <?php
     $attributes = array('class' => 'col-sm-offset-2 col-sm-8 form-horizontal ajax_form');
-    echo form_open_multipart(base_url('category/update_category'), $attributes);
+    echo form_open_multipart(base_url('category/create'), $attributes);
 ?>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">选择分类<sup class="red">*</sup></label>

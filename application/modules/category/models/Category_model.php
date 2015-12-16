@@ -28,7 +28,12 @@ class Category_Model extends Api_Model {
 	public function update_category($params='')
 	{
 		$response = $this->post(BASE_API_URL.'product_category/categoryUpdate' , $params);
-		// var_dump($response);exit();
+		return $response;
+	}
+
+	public function create_category($params='')
+	{
+		$response = $this->post(BASE_API_URL.'product_category/categoryCreate' , $params);
 		return $response;
 	}
 }
